@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/foodJournalFragment">
+
+    <fragment
+        android:id="@+id/foodJournalFragment"
+        android:name="com.upscale.upscale.FoodJournalFragment"
+        android:label="Food Journal"
+        tools:layout="@layout/fragment_food_journal">
+        <action
+            android:id="@+id/action_foodJournalFragment_to_addFoodGraph"
+            app:destination="@id/addFoodGraph"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+    <navigation android:id="@+id/addFoodGraph"
+        app:startDestination="@id/searchFoodFragment">
+        <fragment
+            android:id="@+id/searchFoodFragment"
+            android:name="com.upscale.upscale.SearchFoodFragment"
+            android:label="Search Foods"
+            tools:layout="@layout/fragment_search_food">
+            <action
+                android:id="@+id/action_searchFoodFragment_to_scannerFragment"
+                app:destination="@id/scannerFragment" />
+            <action
+                android:id="@+id/action_searchFoodFragment_to_foodInfoFragment"
+                app:destination="@id/foodInfoFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/scannerFragment"
+            android:name="com.upscale.upscale.ScannerFragment"
+            android:label="Scanner"
+            tools:layout="@layout/fragment_scanner">
+
+            <action
+                android:id="@+id/action_scannerFragment_to_foodInfoFragment"
+                app:destination="@id/foodInfoFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/foodInfoFragment"
+            android:name="com.upscale.upscale.FoodInfoFragment"
+            android:label="FoodInfoFragment"
+            tools:layout="@layout/fragment_food_info" />
+        <action
+            android:id="@+id/action_addFoodGraph_to_foodJournalFragment"
+            app:destination="@id/foodJournalFragment"
+            app:popUpTo="@id/foodJournalFragment"
+            app:popUpToInclusive="true"
+            app:exitAnim="@anim/nav_default_pop_exit_anim" />
+    </navigation>
+
+</navigation>

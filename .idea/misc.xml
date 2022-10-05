@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/layout/content_main.xml" value="0.5546875" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/layout/fragment_first.xml" value="0.5546875" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/layout/fragment_food_journal.xml" value="0.5546875" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/layout/fragment_food_log.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/layout/fragment_scanner.xml" value="0.5141903171953256" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/layout/item_journal_meal.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/Daniel/AndroidStudioProjects/Upscale/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.301" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
