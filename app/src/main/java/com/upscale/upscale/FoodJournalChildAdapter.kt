@@ -25,9 +25,16 @@ class FoodJournalChildAdapter : ListAdapter<Food,FoodJournalChildAdapter.ViewHol
         lateinit var food: Food
 
         val foodNameTextView = binding.foodNameTextView
+        val energyTextView = binding.energyTextView
+
         fun bind(){
             food = getItem(bindingAdapterPosition)
+
             foodNameTextView.text = food.info.name
+            energyTextView.text = String.format(
+                "%.0f",
+                food.energy
+            )
         }
     }
 

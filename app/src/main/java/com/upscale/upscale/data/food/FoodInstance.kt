@@ -21,6 +21,12 @@ data class Food(
     @Relation(
         parentColumn = "food_info_id",
         entityColumn = "id"
-    )
-    val info: FoodInfo
-)
+    ) val info: FoodInfo
+    ){
+
+    // Getters for the specific nutritional values given the food type and serving
+    val energy get() = info.metricToServingRatio * info.energy1 * instance.serving
+    val protein get() = info.metricToServingRatio * info.protein1 * instance.serving
+    val fat get() = info.metricServingValue * info.fats1 * instance.serving
+    val carbs get() = info.metricServingValue * info.carbs1 * instance.serving
+}

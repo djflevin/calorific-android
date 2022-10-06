@@ -20,6 +20,8 @@ data class Meal(
         parentColumn = "id",
         entityColumn="meal_id",
         entity = FoodInstance::class
-    )
-    val food: List<Food>
-)
+    ) val foods: List<Food>
+) {
+    val calories get() = foods.map { it.energy }.sum()
+    val protein get() = foods.map { it.protein }.sum()
+}

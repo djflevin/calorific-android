@@ -10,11 +10,21 @@
         android:id="@+id/foodNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="16dp"
         tools:text="Weetabix" />
+
+    <TextView
+        android:id="@+id/energyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        app:layout_constraintBottom_toBottomOf="@+id/foodNameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="100" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

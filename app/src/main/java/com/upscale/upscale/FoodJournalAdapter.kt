@@ -26,7 +26,7 @@ class FoodJournalAdapter() : ListAdapter<Meal,FoodJournalAdapter.ViewHolder>(Mea
 
     }
 
-    inner class ViewHolder(val binding: ItemJournalMealBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(binding: ItemJournalMealBinding): RecyclerView.ViewHolder(binding.root){
         lateinit var meal: Meal
 
         val adapter = FoodJournalChildAdapter()
@@ -37,7 +37,7 @@ class FoodJournalAdapter() : ListAdapter<Meal,FoodJournalAdapter.ViewHolder>(Mea
         fun bind(){
             meal = getItem(bindingAdapterPosition)
             textView.text = meal.mealInfo.name
-            adapter.submitList(meal.food)
+            adapter.submitList(meal.foods)
         }
 
         init{

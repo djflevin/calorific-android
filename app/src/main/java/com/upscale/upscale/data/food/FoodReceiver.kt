@@ -1,6 +1,5 @@
 package com.upscale.upscale.data.food
 
-import android.util.Log
 import com.squareup.moshi.Json
 import com.upscale.upscale.data.FoodInfo
 import java.util.*
@@ -27,11 +26,11 @@ data class FoodReceiver(
             code = code,
             offId = product.get("_id") as String,
             name = product.get("product_name") as String,
-            energy = nutrients["energy_100g"] as Double,
+            energy100 = nutrients["energy_100g"] as Double,
             energyUnit = nutrients["energy_unit"] as String,
-            protein = nutrients["proteins_100g"] as Double,
-            fats = nutrients["fat_100g"] as Double,
-            carbs = nutrients["carbohydrates_100g"] as Double,
+            protein100 = nutrients["proteins_100g"] as Double,
+            fats100 = nutrients["fat_100g"] as Double,
+            carbs100 = nutrients["carbohydrates_100g"] as Double,
             servingValue = servingDetails.servingValue,
             servingUnit = servingDetails.servingUnit,
             metricServingValue = servingDetails.metricValue,

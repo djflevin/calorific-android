@@ -37,19 +37,24 @@ class FoodInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel.food.observe(viewLifecycleOwner) { foodInfo ->
-            val servingToMetricRatio = foodInfo.metricServingValue / foodInfo.servingValue
+        fun formatNutritionValueToString(servingValue: Double, metricToServingRatio: Double, nutritionValuePer1: Double): String{
+            return "${String.format("%.1f",
+                servingValue * metricToServingRatio * nutritionValuePer1
+                )} g"
+        }
 
+        viewModel.food.observe(viewLifecycleOwner) { foodInfo ->
             binding.foodNameTextView.text = foodInfo.name
             binding.barcodeTextView.text = "Barcode: ${foodInfo.code}"
 
-            binding.carbsTextView.text = "${foodInfo.carbs} g"
-            binding.fatTextView.text = "${foodInfo.fats} g"
-            binding.proteinTextView.text = "${foodInfo.protein} g"
+            binding.carbsTextView.text = formatNutritionValueToString(foodInfo.servingValue, foodInfo.metricToServingRatio, foodInfo.carbs1)
+            binding.fatTextView.text = formatNutritionValueToString(foodInfo.servingValue, foodInfo.metricToServingRatio, foodInfo.fats1)
+            binding.proteinTextView.text = formatNutritionValueToString(foodInfo.servingValue, foodInfo.metricToServingRatio, foodInfo.protein1)
             binding.caloriesTextView.text = String.format(
                 "%.0f",
-                (foodInfo.energy * foodInfo.servingValue * servingToMetricRatio / 100)
+                (foodInfo.energy1 * foodInfo.servingValue * foodInfo.metricToServingRatio)
             )
+
             binding.caloriesLabel.text = foodInfo.energyUnit
 
             binding.servingTextInputLayout.suffixText = foodInfo.servingUnit
@@ -63,8 +68,12 @@ class FoodInfoFragment : Fragment() {
                     }
                     binding.caloriesTextView.text = String.format(
                         "%.0f",
-                        (newValue * servingToMetricRatio * foodInfo.energy / 100)
+                        (newValue * foodInfo.metricToServingRatio * foodInfo.energy1)
                     )
+                    binding.carbsTextView.text = formatNutritionValueToString(newValue, foodInfo.metricToServingRatio, foodInfo.carbs1)
+                    binding.fatTextView.text = formatNutritionValueToString(newValue, foodInfo.metricToServingRatio, foodInfo.fats1)
+                    binding.proteinTextView.text = formatNutritionValueToString(newValue, foodInfo.metricToServingRatio, foodInfo.protein1)
+
                 }
             }
 
@@ -73,6 +82,7 @@ class FoodInfoFragment : Fragment() {
                 findNavController().navigate(R.id.action_addFoodGraph_to_foodJournalFragment)
             }
         }
+
         viewModel.meals.observe(viewLifecycleOwner) { mealList ->
             (binding.mealTextView as MaterialAutoCompleteTextView).setSimpleItems(mealList.map { it.mealInfo.name }
                 .toTypedArray())
