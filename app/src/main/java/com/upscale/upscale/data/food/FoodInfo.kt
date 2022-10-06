@@ -16,10 +16,10 @@ data class FoodInfo(
     @ColumnInfo(name = "fats_100") val fats100: Double,
     @ColumnInfo(name = "carbohydrates_100") val carbs100: Double,
     @ColumnInfo(name = "protein_100") val protein100: Double,
-    @ColumnInfo(name = "serving_value") val servingValue: Double, // e.g. biscuits
-    @ColumnInfo(name = "serving_unit") val servingUnit: String,
-    @ColumnInfo(name = "metric_serving_value") val metricServingValue: Double, // e.g. 2 biscuits = 16.67 g
-    @ColumnInfo(name = "metric_serving_unit") val metricServingUnit: String,
+    @ColumnInfo(name = "serving_value") val servingValue: Double, // e.g. 2 for '2 biscuits'
+    @ColumnInfo(name = "serving_unit") val servingUnit: String, // e.g. biscuits
+    @ColumnInfo(name = "metric_serving_value") val metricServingValue: Double, // e.g. 16.67 where 2 biscuits = 16.67 g
+    @ColumnInfo(name = "metric_serving_unit") val metricServingUnit: String, // e.g. 'g' for grams
     @ColumnInfo(name = "last_accessed") val lastAccessed: Long? = null
 ){
 

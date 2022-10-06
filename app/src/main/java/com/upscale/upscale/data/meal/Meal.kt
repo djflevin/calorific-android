@@ -22,6 +22,6 @@ data class Meal(
         entity = FoodInstance::class
     ) val foods: List<Food>
 ) {
-    val calories get() = foods.map { it.energy }.sum()
+    val energy get() = foods.map { it.energy }.sum()
     val protein get() = foods.map { it.protein }.sum()
 }

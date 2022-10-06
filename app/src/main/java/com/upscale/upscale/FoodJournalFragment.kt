@@ -45,6 +45,7 @@ class FoodJournalFragment : Fragment() {
 
 
 
+
         // Configure adapter onClick behaviour
         adapter.onAddFoodButtonPressed = { meal ->
             setFragmentResult("meal", bundleOf("meal_id" to meal.mealInfo.id))
@@ -53,6 +54,10 @@ class FoodJournalFragment : Fragment() {
 
         viewModel.meals.observe(viewLifecycleOwner){
             adapter.submitList(it)
+            binding.caloriesRemainingTextView.text = String.format(
+                "%.0f",
+                2700 - it.map { it.energy }.sum()
+            )
         }
 
 

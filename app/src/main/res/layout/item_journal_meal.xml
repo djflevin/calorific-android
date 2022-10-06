@@ -30,6 +30,7 @@
         android:layout_width="match_parent"
         tools:listitem="@layout/item_journal_food"
         android:layout_height="0dp"
+        tools:itemCount="3"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 

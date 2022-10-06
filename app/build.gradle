@@ -24,6 +24,9 @@ android {
         }
     }
     compileOptions {
+
+        coreLibraryDesugaringEnabled true
+
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -37,6 +40,10 @@ android {
 }
 
 dependencies {
+
+    //noinspection GradleDependency
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.0' // Do not update, minimum Gradle plugin version 7.4.0-alpha10
+
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
