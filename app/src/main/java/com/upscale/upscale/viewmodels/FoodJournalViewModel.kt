@@ -1,8 +1,8 @@
 package com.upscale.upscale.viewmodels
 
-import androidx.lifecycle.*
-import com.upscale.upscale.data.FoodInfo
-import com.upscale.upscale.data.meal.Meal
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.upscale.upscale.data.Repository
 import kotlinx.coroutines.launch
 

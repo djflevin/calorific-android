@@ -31,8 +31,8 @@ data class FoodReceiver(
 
         return FoodInfo(
             code = code,
-            offId = product.get("_id") as String,
-            name = product.get("product_name") as String,
+            offId = product["_id"] as String,
+            name = product["product_name"] as String,
             energyCals100 = energyCals100 ?: (energyKj100!! / KCAL_TO_KJ),
             energyKj100 =energyKj100 ?: (energyCals100!! * KCAL_TO_KJ),
             protein100 = nutrients["proteins_100g"] as Double,
@@ -69,7 +69,7 @@ data class FoodReceiver(
                 )
             }
             else -> {
-                val dataPreparedPer = product.get("nutrition_data_prepared_per") as String
+                val dataPreparedPer = product["nutrition_data_prepared_per"] as String
                 if(dataPreparedPer == "100ml"){
                     Serving(
                         metricValue = 100.0,

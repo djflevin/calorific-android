@@ -11,7 +11,7 @@ import com.upscale.upscale.data.meal.Meal
 import com.upscale.upscale.databinding.ItemJournalMealBinding
 import com.upscale.upscale.utils.dp
 
-class FoodJournalAdapter() : ListAdapter<Meal,FoodJournalAdapter.ViewHolder>(MealDiffUtil) {
+class FoodJournalAdapter : ListAdapter<Meal,FoodJournalAdapter.ViewHolder>(MealDiffUtil) {
     var onAddFoodButtonPressed: ((Meal) -> Unit)? = null
 
 
@@ -29,10 +29,10 @@ class FoodJournalAdapter() : ListAdapter<Meal,FoodJournalAdapter.ViewHolder>(Mea
     inner class ViewHolder(binding: ItemJournalMealBinding): RecyclerView.ViewHolder(binding.root){
         lateinit var meal: Meal
 
-        val adapter = FoodJournalChildAdapter()
+        private val adapter = FoodJournalChildAdapter()
 
         val recyclerView = binding.recyclerView
-        val textView = binding.textView
+        private val textView = binding.textView
 
         fun bind(){
             meal = getItem(bindingAdapterPosition)

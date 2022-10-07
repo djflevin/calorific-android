@@ -52,11 +52,11 @@ class FoodJournalFragment : Fragment() {
             findNavController().navigate(R.id.action_foodJournalFragment_to_addFoodGraph)
         }
 
-        viewModel.meals.observe(viewLifecycleOwner){
-            adapter.submitList(it)
+        viewModel.meals.observe(viewLifecycleOwner){ mealList ->
+            adapter.submitList(mealList)
             binding.caloriesRemainingTextView.text = String.format(
                 "%.0f",
-                2700 - it.map { it.energy }.sum()
+                2700 - mealList.sumOf { it.energy }
             )
         }
 

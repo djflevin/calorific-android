@@ -21,11 +21,11 @@ class SearchFoodAdapter : ListAdapter<FoodInfo,SearchFoodAdapter.ViewHolder>(Foo
         }
     }
 
-    inner class ViewHolder(val binding: ItemSearchRecentFoodBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(binding: ItemSearchRecentFoodBinding): RecyclerView.ViewHolder(binding.root){
         lateinit var foodInfo: FoodInfo
 
 
-        val textView = binding.foodNameTextView
+        private val textView = binding.foodNameTextView
 
         fun bind(){
             foodInfo = getItem(bindingAdapterPosition)

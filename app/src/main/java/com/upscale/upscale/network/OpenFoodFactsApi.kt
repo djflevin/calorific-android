@@ -18,13 +18,13 @@ private val moshi = Moshi.Builder()
  */
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl("https://world.openfoodfacts.org")
+    .baseUrl(OpenFoodFactsApiService.BASE_URL)
     .build()
 
 interface OpenFoodFactsApiService{
 
     companion object{
-        private const val BASE_URL = "https://world.openfoodfacts.org"
+        const val BASE_URL = "https://world.openfoodfacts.org"
         private const val API_VER = "v0"
         private const val API_PREFIX = "api/$API_VER"
     }
