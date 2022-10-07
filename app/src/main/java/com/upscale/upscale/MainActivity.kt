@@ -34,10 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
 
         navController = (supportFragmentManager.findFragmentById(binding.navHostFragmentContainer.id) as NavHostFragment).navController
-        setupActionBarWithNavController(navController,  AppBarConfiguration(navController.graph))
         binding.bottomNavView.setupWithNavController(navController)
 
 
