@@ -62,7 +62,7 @@
                     android:id="@+id/caloriesLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="cals"/>
+                    tools:text="cals" />
 
             </LinearLayout>
 
@@ -159,13 +159,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Meal"
+            app:hintAnimationEnabled="false"
             app:layout_constraintTop_toBottomOf="@+id/divider2">
 
             <AutoCompleteTextView
                 android:id="@+id/mealTextView"
-                android:inputType="none"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -173,20 +174,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Serving"
+            app:hintAnimationEnabled="false"
             app:layout_constraintTop_toBottomOf="@+id/mealTextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/servingEditText"
-                android:inputType="numberDecimal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:textAppearance="?attr/textAppearanceLabelSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
             app:layout_constraintEnd_toEndOf="@+id/servingTextInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/servingTextInputLayout"
             tools:text="1 biscuit = 16.67 g" />

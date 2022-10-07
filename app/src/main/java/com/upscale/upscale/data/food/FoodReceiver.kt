@@ -33,7 +33,7 @@ data class FoodReceiver(
             code = code,
             offId = product["_id"] as String,
             name = product["product_name"] as String,
-            energyCals100 = energyCals100 ?: (energyKj100!! / KCAL_TO_KJ),
+            energyCals100 = energyCals100 ?: (energyKj100!! / KCAL_TO_KJ), // Bad data could cause a crash here
             energyKj100 =energyKj100 ?: (energyCals100!! * KCAL_TO_KJ),
             protein100 = nutrients["proteins_100g"] as Double,
             fats100 = nutrients["fat_100g"] as Double,

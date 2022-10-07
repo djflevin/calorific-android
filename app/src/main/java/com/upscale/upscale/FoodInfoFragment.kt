@@ -59,6 +59,7 @@ class FoodInfoFragment : Fragment() {
 
             binding.servingTextInputLayout.suffixText = foodInfo.servingUnit
             binding.servingEditText.setText(foodInfo.servingValue.toString())
+            binding.servingTextInputLayout.isHintAnimationEnabled = true
 
             binding.servingEditText.addTextChangedListener {
                 it?.let {
@@ -95,6 +96,7 @@ class FoodInfoFragment : Fragment() {
                     mealList.find { it.mealInfo.name == editable.toString() }?.mealInfo?.id?.let { viewModel.setMeal(it) }
                 }
             }
+            binding.mealTextInputLayout.isHintAnimationEnabled = true // Enables hint label animations after text is set to stop jumping animations
 
 
         }
