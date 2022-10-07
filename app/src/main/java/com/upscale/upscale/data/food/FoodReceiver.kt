@@ -2,6 +2,7 @@ package com.upscale.upscale.data.food
 
 import com.squareup.moshi.Json
 import com.upscale.upscale.data.FoodInfo
+import com.upscale.upscale.utils.KCAL_TO_KJ
 import java.util.*
 
 data class Serving(
@@ -19,15 +20,21 @@ data class FoodReceiver(
 
 
     fun toFoodInfo() : FoodInfo {
-        val nutrients = product.get("nutriments") as Map<*, *>
-        val servingDetails = unpackServingSize(product.get("serving_size") as? String?)
+        val nutrients = product["nutriments"] as Map<*, *>
+        val servingDetails = unpackServingSize(product["serving_size"] as? String?)
+
+        val energy = nutrients["energy_100g"] as Double
+        val energyUnit = nutrients["energy_unit"] as String
+
+        val energyKj100 = nutrients["energy-kj_100g"] as? Double? ?: if(energyUnit == "kJ") energy else null
+        val energyCals100 = nutrients["energy-kcal_100g"] as? Double? ?: if(energyUnit == "kcal") energy else null
 
         return FoodInfo(
             code = code,
             offId = product.get("_id") as String,
             name = product.get("product_name") as String,
-            energy100 = nutrients["energy_100g"] as Double,
-            energyUnit = nutrients["energy_unit"] as String,
+            energyCals100 = energyCals100 ?: (energyKj100!! / KCAL_TO_KJ),
+            energyKj100 =energyKj100 ?: (energyCals100!! * KCAL_TO_KJ),
             protein100 = nutrients["proteins_100g"] as Double,
             fats100 = nutrients["fat_100g"] as Double,
             carbs100 = nutrients["carbohydrates_100g"] as Double,

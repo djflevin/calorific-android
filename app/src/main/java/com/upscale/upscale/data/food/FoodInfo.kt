@@ -11,8 +11,8 @@ data class FoodInfo(
     @ColumnInfo(name="off_id") val offId: String,
     @ColumnInfo(name = "code") val code: String?,
     @ColumnInfo(name = "product_name") val name: String?,
-    @ColumnInfo(name = "energy_100") val energy100: Double,
-    @ColumnInfo(name = "energy_unit") val energyUnit: String,
+    @ColumnInfo(name = "energy-kcal_100") val energyCals100: Double,
+    @ColumnInfo(name = "energy-kj_100") val energyKj100: Double,
     @ColumnInfo(name = "fats_100") val fats100: Double,
     @ColumnInfo(name = "carbohydrates_100") val carbs100: Double,
     @ColumnInfo(name = "protein_100") val protein100: Double,
@@ -25,7 +25,8 @@ data class FoodInfo(
 
     // Convenience values
     @Ignore val metricToServingRatio = metricServingValue / servingValue
-    @Ignore val energy1 = energy100 / 100
+    @Ignore val energyCals1 = energyCals100 / 100
+    @Ignore val energyKj1 = energyKj100 / 100
     @Ignore val protein1 = protein100 / 100
     @Ignore val fats1 = fats100 / 100
     @Ignore val carbs1 = carbs100 / 100

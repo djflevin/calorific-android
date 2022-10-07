@@ -49,7 +49,8 @@ class Repository(
                 listOf(
                     MealInfo(name = "Breakfast"),
                     MealInfo(name = "Lunch"),
-                    MealInfo(name = "Dinner")
+                    MealInfo(name = "Dinner"),
+                    MealInfo(name = "Snacks")
                 )
             )
         }

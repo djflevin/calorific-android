@@ -52,10 +52,10 @@ class FoodInfoFragment : Fragment() {
             binding.proteinTextView.text = formatNutritionValueToString(foodInfo.servingValue, foodInfo.metricToServingRatio, foodInfo.protein1)
             binding.caloriesTextView.text = String.format(
                 "%.0f",
-                (foodInfo.energy1 * foodInfo.servingValue * foodInfo.metricToServingRatio)
+                (foodInfo.energyCals1 * foodInfo.servingValue * foodInfo.metricToServingRatio)
             )
 
-            binding.caloriesLabel.text = foodInfo.energyUnit
+            binding.caloriesLabel.text = "Cals"
 
             binding.servingTextInputLayout.suffixText = foodInfo.servingUnit
             binding.servingEditText.setText(foodInfo.servingValue.toString())
@@ -68,7 +68,7 @@ class FoodInfoFragment : Fragment() {
                     }
                     binding.caloriesTextView.text = String.format(
                         "%.0f",
-                        (newValue * foodInfo.metricToServingRatio * foodInfo.energy1)
+                        (newValue * foodInfo.metricToServingRatio * foodInfo.energyCals1)
                     )
                     binding.carbsTextView.text = formatNutritionValueToString(newValue, foodInfo.metricToServingRatio, foodInfo.carbs1)
                     binding.fatTextView.text = formatNutritionValueToString(newValue, foodInfo.metricToServingRatio, foodInfo.fats1)
