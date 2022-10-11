@@ -54,10 +54,10 @@ class FoodJournalFragment : Fragment() {
 
         viewModel.meals.observe(viewLifecycleOwner){ mealList ->
             adapter.submitList(mealList)
-            binding.caloriesRemainingTextView.text = String.format(
+/*            binding.caloriesRemainingTextView.text = String.format(
                 "%.0f",
                 2700 - mealList.sumOf { it.energy }
-            )
+            )*/
         }
 
 
