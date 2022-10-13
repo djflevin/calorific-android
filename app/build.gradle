@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'com.squareup.sqldelight'
     id 'kotlin-kapt'
 }
 
@@ -45,8 +44,6 @@ dependencies {
     //noinspection GradleDependency
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.0' // Do not update, minimum Gradle plugin version 7.4.0-alpha10
 
-    implementation "com.squareup.sqldelight:runtime:1.5.3"
-    implementation "com.squareup.sqldelight:android-driver:1.5.3"
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
