@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/foodJournalFragment"
-        android:name="com.upscale.upscale.FoodJournalFragment"
+        android:name="app.calorific.calorific.FoodJournalFragment"
         android:label="Food Journal"
         tools:layout="@layout/fragment_food_journal">
         <action
@@ -19,7 +19,7 @@
         app:startDestination="@id/searchFoodFragment">
         <fragment
             android:id="@+id/searchFoodFragment"
-            android:name="com.upscale.upscale.SearchFoodFragment"
+            android:name="app.calorific.calorific.SearchFoodFragment"
             android:label="Search Foods"
             tools:layout="@layout/fragment_search_food">
             <action
@@ -31,7 +31,7 @@
         </fragment>
         <fragment
             android:id="@+id/scannerFragment"
-            android:name="com.upscale.upscale.ScannerFragment"
+            android:name="app.calorific.calorific.ScannerFragment"
             android:label="Scanner"
             tools:layout="@layout/fragment_scanner">
 
@@ -41,7 +41,7 @@
         </fragment>
         <fragment
             android:id="@+id/foodInfoFragment"
-            android:name="com.upscale.upscale.FoodInfoFragment"
+            android:name="app.calorific.calorific.FoodInfoFragment"
             android:label="FoodInfoFragment"
             tools:layout="@layout/fragment_food_info" />
         <action

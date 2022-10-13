@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Upscale" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Calorific" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Upscale" parent="Base.Theme.Upscale" />
+    <style name="Theme.Calorific" parent="Base.Theme.Calorific" />
 </resources>
