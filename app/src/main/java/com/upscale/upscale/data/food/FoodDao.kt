@@ -1,10 +1,7 @@
 package com.upscale.upscale.data.food
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.upscale.upscale.data.FoodInfo
 
 @Dao
@@ -12,6 +9,10 @@ interface FoodDao {
 
     @Query("SELECT * FROM foodinfo WHERE id=:id")
     suspend fun getFood(id: Int) : FoodInfo
+
+    @Transaction
+    @Query("SELECT * FROM foodinstance WHERE date=:date")
+    fun getFoodsByDate(date: String) : LiveData<List<Food>>
 
     @Update
     suspend fun updateFood(foodInfo: FoodInfo)

@@ -84,22 +84,15 @@ class FoodInfoFragment : Fragment() {
             }
         }
 
-        viewModel.meals.observe(viewLifecycleOwner) { mealList ->
-            (binding.mealTextView as MaterialAutoCompleteTextView).setSimpleItems(mealList.map { it.mealInfo.name }
-                .toTypedArray())
-            (binding.mealTextView as MaterialAutoCompleteTextView).apply {
-                setText(
-                    mealList.find { it.mealInfo.id == viewModel.mealId }?.mealInfo?.name ?: "",
-                    false
-                )
-                addTextChangedListener { editable ->
-                    mealList.find { it.mealInfo.name == editable.toString() }?.mealInfo?.id?.let { viewModel.setMeal(it) }
-                }
+        (binding.mealTextView as MaterialAutoCompleteTextView).apply {
+            setSimpleItems(viewModel.meals.toTypedArray())
+            setText(viewModel.selectedMeal)
+            addTextChangedListener{ editable ->
+                viewModel.setMeal(editable.toString())
             }
-            binding.mealTextInputLayout.isHintAnimationEnabled = true // Enables hint label animations after text is set to stop jumping animations
-
-
         }
+
+        binding.mealTextInputLayout.isHintAnimationEnabled = true // Enables hint label animations after text is set to stop jumping animations
 
 
     }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import com.upscale.upscale.data.meal.Meal
+import com.upscale.upscale.data.Meal
 import com.upscale.upscale.databinding.ItemJournalMealBinding
 import com.upscale.upscale.utils.dp
 
@@ -36,7 +36,7 @@ class FoodJournalAdapter : ListAdapter<Meal,FoodJournalAdapter.ViewHolder>(MealD
 
         fun bind(){
             meal = getItem(bindingAdapterPosition)
-            textView.text = meal.mealInfo.name
+            textView.text = meal.name
             adapter.submitList(meal.foods)
         }
 

@@ -36,9 +36,11 @@ class SearchFoodFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setFragmentResultListener("meal") { _, bundle ->
-            viewModel.setMeal(bundle.getInt("meal_id"))
+            viewModel.setMeal(bundle.getString("meal") ?: viewModel.meals[0])
         }
+
         binding.searchTextInputLayout.setEndIconOnClickListener {
             findNavController().navigate(R.id.action_searchFoodFragment_to_scannerFragment)
         }

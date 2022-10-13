@@ -12,12 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.upscale.upscale.app.UpscaleApplication
+import com.upscale.upscale.data.Meal
 import com.upscale.upscale.databinding.FragmentFoodJournalBinding
 import com.upscale.upscale.viewmodels.FoodJournalViewModel
 import com.upscale.upscale.viewmodels.FoodJournalViewModelFactory
 
 class FoodJournalFragment : Fragment() {
-    private var _binding : FragmentFoodJournalBinding? = null
+    private var _binding: FragmentFoodJournalBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: FoodJournalViewModel by activityViewModels {
@@ -38,28 +39,37 @@ class FoodJournalFragment : Fragment() {
 
         // Set up RecyclerView
         val adapter = FoodJournalAdapter()
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.itemAnimator = null
 
 
-
-
         // Configure adapter onClick behaviour
         adapter.onAddFoodButtonPressed = { meal ->
-            setFragmentResult("meal", bundleOf("meal_id" to meal.mealInfo.id))
+            setFragmentResult("meal", bundleOf("meal_id" to meal.name))
             findNavController().navigate(R.id.action_foodJournalFragment_to_addFoodGraph)
         }
 
-        viewModel.meals.observe(viewLifecycleOwner){ mealList ->
-            adapter.submitList(mealList)
-/*            binding.caloriesRemainingTextView.text = String.format(
-                "%.0f",
-                2700 - mealList.sumOf { it.energy }
-            )*/
+
+
+        viewModel.foods.observe(viewLifecycleOwner) { foodList ->
+            adapter.submitList(
+                viewModel.mealNames.map { mealName ->
+                    Meal(
+                        name = mealName,
+                        foods = foodList.filter { it.instance.meal == mealName }
+                    )
+                }
+            )
         }
 
+
+        /*binding.caloriesRemainingTextView.text = String.format(
+            "%.0f",
+            2700 - mealList.sumOf { it.energy }
+        )*/
 
 
     }

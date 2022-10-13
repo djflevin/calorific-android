@@ -1,16 +1,13 @@
 package com.upscale.upscale.data.food
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Relation
+import androidx.room.*
 import com.upscale.upscale.data.FoodInfo
 
 @Entity
 data class FoodInstance(
     @PrimaryKey(autoGenerate = true)val id: Int? = null,
-    @ColumnInfo(name="meal_id")val mealId: Int,
+    @ColumnInfo(name="meal")val meal: String,
+    @ColumnInfo(name="date")val date: String,
     @ColumnInfo(name="food_info_id")val foodId: Int,
     @ColumnInfo(name="off_id")val offId: String,
     @ColumnInfo(name="serving")val serving: Double
@@ -29,4 +26,5 @@ data class Food(
     val protein get() = info.metricToServingRatio * info.protein1 * instance.serving
     val fat get() = info.metricServingValue * info.fats1 * instance.serving
     val carbs get() = info.metricServingValue * info.carbs1 * instance.serving
+
 }

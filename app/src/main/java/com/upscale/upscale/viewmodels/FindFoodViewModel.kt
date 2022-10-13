@@ -12,7 +12,7 @@ class FindFoodViewModel(private val repository: Repository) : ViewModel() {
     val foodHistory = repository.foodHistory
     val meals = repository.meals
 
-    var mealId = -1
+    var selectedMeal = meals[0]
 
     private val _food = MutableLiveData<FoodInfo>()
     val food = _food as LiveData<FoodInfo>
@@ -30,8 +30,8 @@ class FindFoodViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun setMeal(id: Int){
-        mealId = id
+    fun setMeal(meal: String){
+        selectedMeal = meal
     }
 
     fun setFood(food: FoodInfo){
@@ -40,7 +40,7 @@ class FindFoodViewModel(private val repository: Repository) : ViewModel() {
 
     fun saveFood(food: FoodInfo, serving: Double){
         viewModelScope.launch{
-            repository.saveFood(food, mealId, serving)
+            repository.saveFood(food, selectedMeal, serving)
         }
     }
 

@@ -1,20 +1,22 @@
 package com.upscale.upscale.data
 
-import com.upscale.upscale.data.food.FoodInstance
+import androidx.lifecycle.LiveData
+import com.upscale.upscale.data.food.Food
 import com.upscale.upscale.data.food.FoodDao
-import com.upscale.upscale.data.meal.MealDao
-import com.upscale.upscale.data.meal.MealInfo
+import com.upscale.upscale.data.food.FoodInstance
 import com.upscale.upscale.network.OpenFoodFactsApi
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class Repository(
     private val foodDao: FoodDao,
-    private val mealDao: MealDao
     ) {
     private val TAG = "Repository"
     private val openFoodFactsApi = OpenFoodFactsApi
 
-    val meals = mealDao.loadMeals()
+
+    val meals = listOf("Breakfast", "Lunch", "Dinner", "Snacks")
 
     val foodHistory = foodDao.getRecentFoods()
 
@@ -31,29 +33,21 @@ class Repository(
         }
     }
 
+    fun getFoods(date: String) : LiveData<List<Food>> = foodDao.getFoodsByDate(date)
 
-    suspend fun saveFood(foodInfo: FoodInfo, mealId: Int, serving: Double){
+
+
+
+    suspend fun saveFood(foodInfo: FoodInfo, meal: String, serving: Double){
         foodDao.saveFood(
             FoodInstance(
-                mealId = mealId,
+                meal = meal,
+                date = ZonedDateTime.now().format(DateTimeFormatter.ISO_DATE),
                 foodId = foodInfo.id,
                 offId = foodInfo.offId,
                 serving = serving
             )
         )
-    }
-
-    suspend fun checkMealsAndPopulate(){
-        if(!mealDao.checkIfMealsExists()){
-            mealDao.insertMeals(
-                listOf(
-                    MealInfo(name = "Breakfast"),
-                    MealInfo(name = "Lunch"),
-                    MealInfo(name = "Dinner"),
-                    MealInfo(name = "Snacks")
-                )
-            )
-        }
     }
 
 
