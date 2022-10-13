@@ -48,7 +48,7 @@ class FoodJournalFragment : Fragment() {
 
         // Configure adapter onClick behaviour
         adapter.onAddFoodButtonPressed = { meal ->
-            setFragmentResult("meal", bundleOf("meal_id" to meal.name))
+            setFragmentResult("meal", bundleOf("meal" to meal.name))
             findNavController().navigate(R.id.action_foodJournalFragment_to_addFoodGraph)
         }
 
@@ -63,6 +63,7 @@ class FoodJournalFragment : Fragment() {
                     )
                 }
             )
+            adapter.currentList.sumOf { it.energy }
         }
 
 
