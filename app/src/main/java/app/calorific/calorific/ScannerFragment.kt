@@ -1,5 +1,6 @@
 package app.calorific.calorific
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,7 @@ import androidx.navigation.navGraphViewModels
 import app.calorific.calorific.analyzer.BarcodeAnalyzer
 import app.calorific.calorific.app.CalorificApplication
 import app.calorific.calorific.databinding.FragmentScannerBinding
+import app.calorific.calorific.utils.CAMERA_PERMISSION_REQUEST_CODE
 import app.calorific.calorific.viewmodels.FindFoodViewModel
 import app.calorific.calorific.viewmodels.FindFoodViewModelFactory
 import java.util.concurrent.Executors
@@ -47,6 +50,11 @@ class ScannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        when(hasCameraPermission()){
+            true -> {}
+            false -> requestCameraPermission()
+        }
+
         currentlyProcessingBarcode.set(false)
         bindCamera()
 
@@ -55,6 +63,18 @@ class ScannerFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun hasCameraPermission() = ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+
+    private fun requestCameraPermission(){
+        // opening up dialog to ask for camera permission
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(android.Manifest.permission.CAMERA),
+            CAMERA_PERMISSION_REQUEST_CODE
+        )
+
     }
 
     private fun bindCamera(){
