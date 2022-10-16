@@ -86,7 +86,7 @@ class FoodInfoFragment : Fragment() {
 
         (binding.mealTextView as MaterialAutoCompleteTextView).apply {
             setSimpleItems(viewModel.meals.toTypedArray())
-            setText(viewModel.selectedMeal)
+            setText(viewModel.selectedMeal, false)
             addTextChangedListener{ editable ->
                 viewModel.setMeal(editable.toString())
             }
