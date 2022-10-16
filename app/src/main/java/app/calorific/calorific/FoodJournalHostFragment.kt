@@ -35,7 +35,7 @@ class FoodJournalHostFragment : Fragment() {
 
         val adapter = DayPagerAdapter()
         binding.viewPager.adapter = adapter
-        binding.viewPager.currentItem = viewPagerPosition
+        binding.viewPager.setCurrentItem(viewPagerPosition, false)
         binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)

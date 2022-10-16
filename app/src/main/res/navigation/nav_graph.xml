@@ -8,14 +8,15 @@
     <fragment
         android:id="@+id/foodJournalHostFragment"
         android:name="app.calorific.calorific.FoodJournalHostFragment"
-        tools:layout="@layout/fragment_food_journal"
-        android:label="FoodJournalHostFragment" >
+        android:label="FoodJournalHostFragment"
+        tools:layout="@layout/fragment_food_journal">
         <action
             android:id="@+id/action_foodJournalHostFragment_to_addFoodGraph"
             app:destination="@id/addFoodGraph" />
     </fragment>
 
-    <navigation android:id="@+id/addFoodGraph"
+    <navigation
+        android:id="@+id/addFoodGraph"
         app:startDestination="@id/searchFoodFragment">
         <fragment
             android:id="@+id/searchFoodFragment"
@@ -29,16 +30,17 @@
                 android:id="@+id/action_searchFoodFragment_to_foodInfoFragment"
                 app:destination="@id/foodInfoFragment" />
         </fragment>
+
         <fragment
             android:id="@+id/scannerFragment"
             android:name="app.calorific.calorific.ScannerFragment"
             android:label="Scanner"
             tools:layout="@layout/fragment_scanner">
-
             <action
                 android:id="@+id/action_scannerFragment_to_foodInfoFragment"
                 app:destination="@id/foodInfoFragment" />
         </fragment>
+
         <fragment
             android:id="@+id/foodInfoFragment"
             android:name="app.calorific.calorific.FoodInfoFragment"
@@ -46,10 +48,9 @@
             tools:layout="@layout/fragment_food_info" />
         <action
             android:id="@+id/action_addFoodGraph_to_foodJournalHostFragment"
-            app:destination="@id/foodJournalHostFragment"
-            app:popUpTo="@id/foodJournalHostFragment"
-            app:popUpToInclusive="true"
-            app:exitAnim="@anim/nav_default_pop_exit_anim" />
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/addFoodGraph"
+            app:popUpToInclusive="true" />
     </navigation>
 
 </navigation>
