@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,8 +36,9 @@ class SearchFoodFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setFragmentResultListener("meal") { _, bundle ->
-            viewModel.setMeal(bundle.getString("meal") ?: viewModel.meals[0])
+        requireActivity().supportFragmentManager.setFragmentResultListener("add_food_info", viewLifecycleOwner) { _, bundle ->
+            bundle.getString("meal")?.let { viewModel.setMeal(it) }
+            bundle.getString("date")?.let { viewModel.setDate(it) }
         }
 
         binding.searchTextInputLayout.setEndIconOnClickListener {

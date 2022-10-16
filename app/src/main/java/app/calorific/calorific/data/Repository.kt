@@ -6,8 +6,6 @@ import app.calorific.calorific.data.food.FoodDao
 import app.calorific.calorific.data.food.FoodInfo
 import app.calorific.calorific.data.food.FoodInstance
 import app.calorific.calorific.network.OpenFoodFactsApi
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class Repository(
@@ -39,11 +37,11 @@ class Repository(
 
 
 
-    suspend fun saveFood(foodInfo: FoodInfo, meal: String, serving: Double){
+    suspend fun saveFood(foodInfo: FoodInfo, meal: String, date: String, serving: Double){
         foodDao.saveFood(
             FoodInstance(
                 meal = meal,
-                date = ZonedDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+                date = date,
                 foodId = foodInfo.id,
                 offId = foodInfo.offId,
                 serving = serving

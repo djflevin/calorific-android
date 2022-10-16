@@ -80,7 +80,7 @@ class FoodInfoFragment : Fragment() {
 
             binding.addFoodFloatingActionButton.setOnClickListener {
                 viewModel.saveFood(foodInfo, binding.servingEditText.text.toString().toDouble())
-                findNavController().navigate(R.id.action_addFoodGraph_to_foodJournalFragment)
+                findNavController().navigate(R.id.action_addFoodGraph_to_foodJournalHostFragment)
             }
         }
 

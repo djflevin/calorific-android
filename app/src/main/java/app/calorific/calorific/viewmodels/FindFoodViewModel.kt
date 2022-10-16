@@ -5,6 +5,8 @@ import androidx.lifecycle.*
 import app.calorific.calorific.data.Repository
 import app.calorific.calorific.data.food.FoodInfo
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class FindFoodViewModel(private val repository: Repository) : ViewModel() {
     private val TAG = "FindFoodViewModel"
@@ -13,6 +15,8 @@ class FindFoodViewModel(private val repository: Repository) : ViewModel() {
     val meals = repository.meals
 
     var selectedMeal = meals[0]
+
+    var selectedDate: String = ZonedDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
 
     private val _food = MutableLiveData<FoodInfo>()
     val food = _food as LiveData<FoodInfo>
@@ -34,13 +38,17 @@ class FindFoodViewModel(private val repository: Repository) : ViewModel() {
         selectedMeal = meal
     }
 
+    fun setDate(date: String){
+        selectedDate = date
+    }
+
     fun setFood(food: FoodInfo){
         _food.value = food
     }
 
     fun saveFood(food: FoodInfo, serving: Double){
         viewModelScope.launch{
-            repository.saveFood(food, selectedMeal, serving)
+            repository.saveFood(food, selectedMeal, selectedDate, serving)
         }
     }
 

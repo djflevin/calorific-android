@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-class FoodJournalViewModel(private val repository: Repository) : ViewModel() {
+class FoodJournalViewModel(private val repository: Repository, val date: String = ZonedDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)) : ViewModel() {
     private val TAG = "FoodJournalViewModel"
 
     val foods = MediatorLiveData<List<Food>>()
@@ -18,7 +18,7 @@ class FoodJournalViewModel(private val repository: Repository) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            foods.addSource(repository.getFoods(ZonedDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE))){
+            foods.addSource(repository.getFoods(date)){
                 foods.value = it
             }
         }
@@ -28,11 +28,11 @@ class FoodJournalViewModel(private val repository: Repository) : ViewModel() {
 
 }
 
-class FoodJournalViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
+class FoodJournalViewModelFactory(private val repository: Repository, private val date: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FoodJournalViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return FoodJournalViewModel(repository) as T
+            return FoodJournalViewModel(repository, date) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

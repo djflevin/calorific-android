@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,13 +15,16 @@ import app.calorific.calorific.data.Meal
 import app.calorific.calorific.databinding.FragmentFoodJournalBinding
 import app.calorific.calorific.viewmodels.FoodJournalViewModel
 import app.calorific.calorific.viewmodels.FoodJournalViewModelFactory
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
-class FoodJournalFragment : Fragment() {
+class FoodJournalFragment(val date: ZonedDateTime) : Fragment() {
     private var _binding: FragmentFoodJournalBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: FoodJournalViewModel by activityViewModels {
-        FoodJournalViewModelFactory((requireActivity().application as CalorificApplication).repository)
+    private val viewModel: FoodJournalViewModel by viewModels {
+        FoodJournalViewModelFactory((requireActivity().application as CalorificApplication).repository, date.format(DateTimeFormatter.ISO_LOCAL_DATE))
     }
 
     override fun onCreateView(
@@ -37,6 +39,18 @@ class FoodJournalFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set top bar title based on date
+        val presentDay = ZonedDateTime.now()
+        val today = presentDay.format(DateTimeFormatter.ISO_LOCAL_DATE)
+        val yesterday = presentDay.minusDays(1L).format(DateTimeFormatter.ISO_LOCAL_DATE)
+        val tomorrow = presentDay.plusDays(1L).format(DateTimeFormatter.ISO_LOCAL_DATE)
+
+        binding.topBarToolbar.title = when(date.format(DateTimeFormatter.ISO_LOCAL_DATE)){
+            today -> "Today"
+            yesterday -> "Yesterday"
+            tomorrow -> "Tomorrow"
+            else -> date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))
+        }
         // Set up RecyclerView
         val adapter = FoodJournalAdapter()
         adapter.stateRestorationPolicy =
@@ -48,8 +62,9 @@ class FoodJournalFragment : Fragment() {
 
         // Configure adapter onClick behaviour
         adapter.onAddFoodButtonPressed = { meal ->
-            setFragmentResult("meal", bundleOf("meal" to meal.name))
-            findNavController().navigate(R.id.action_foodJournalFragment_to_addFoodGraph)
+            requireActivity().supportFragmentManager.setFragmentResult("add_food_info", bundleOf("meal" to meal.name, "date" to date.format(
+                DateTimeFormatter.ISO_LOCAL_DATE)))
+            findNavController().navigate(R.id.action_foodJournalHostFragment_to_addFoodGraph)
         }
 
 

@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/foodJournalFragment">
+    app:startDestination="@id/foodJournalHostFragment">
 
     <fragment
-        android:id="@+id/foodJournalFragment"
-        android:name="app.calorific.calorific.FoodJournalFragment"
-        android:label="Food Journal"
-        tools:layout="@layout/fragment_food_journal">
+        android:id="@+id/foodJournalHostFragment"
+        android:name="app.calorific.calorific.FoodJournalHostFragment"
+        tools:layout="@layout/fragment_food_journal"
+        android:label="FoodJournalHostFragment" >
         <action
-            android:id="@+id/action_foodJournalFragment_to_addFoodGraph"
-            app:destination="@id/addFoodGraph"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            android:id="@+id/action_foodJournalHostFragment_to_addFoodGraph"
+            app:destination="@id/addFoodGraph" />
     </fragment>
+
     <navigation android:id="@+id/addFoodGraph"
         app:startDestination="@id/searchFoodFragment">
         <fragment
@@ -45,9 +45,9 @@
             android:label="FoodInfoFragment"
             tools:layout="@layout/fragment_food_info" />
         <action
-            android:id="@+id/action_addFoodGraph_to_foodJournalFragment"
-            app:destination="@id/foodJournalFragment"
-            app:popUpTo="@id/foodJournalFragment"
+            android:id="@+id/action_addFoodGraph_to_foodJournalHostFragment"
+            app:destination="@id/foodJournalHostFragment"
+            app:popUpTo="@id/foodJournalHostFragment"
             app:popUpToInclusive="true"
             app:exitAnim="@anim/nav_default_pop_exit_anim" />
     </navigation>
