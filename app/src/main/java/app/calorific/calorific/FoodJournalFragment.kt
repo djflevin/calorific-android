@@ -51,6 +51,12 @@ class FoodJournalFragment(val date: ZonedDateTime) : Fragment() {
             tomorrow -> "Tomorrow"
             else -> date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))
         }
+
+        // Configure calendar picker from top app bar
+        binding.topBarToolbar.setOnClickListener {
+            (parentFragment as FoodJournalHostFragment).showDatePickerPopup(date)
+        }
+
         // Set up RecyclerView
         val adapter = FoodJournalAdapter()
         adapter.stateRestorationPolicy =

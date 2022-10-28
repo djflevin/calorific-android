@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import app.calorific.calorific.databinding.FragmentFoodJournalHostBinding
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.time.Duration
+import java.time.Instant
 import java.time.ZonedDateTime
 
 class FoodJournalHostFragment : Fragment() {
@@ -56,6 +60,31 @@ class FoodJournalHostFragment : Fragment() {
                 )
             )
         }
+
+    }
+
+    fun showDatePickerPopup(date: ZonedDateTime){
+        val constraints = CalendarConstraints.Builder()
+            .setOpenAt(
+                date.toInstant().toEpochMilli()
+            )
+            .build()
+
+        val picker = MaterialDatePicker
+            .Builder
+            .datePicker()
+            .setTitleText("Select Date")
+            .setCalendarConstraints(constraints)
+            .build()
+
+        picker.addOnPositiveButtonClickListener {
+            val selectedDate = ZonedDateTime.ofInstant(Instant.ofEpochMilli(it),date.zone)
+            val difference = Duration.between(selectedDate, presentDate).toDays().toInt()
+            binding.viewPager.setCurrentItem(5000-difference,true)
+        }
+
+        picker.show(parentFragmentManager, "materialDatePicker")
+
 
     }
 
