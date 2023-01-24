@@ -2,12 +2,15 @@ package app.calorific.calorific.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
 import app.calorific.calorific.data.food.Food
 import app.calorific.calorific.data.food.FoodDao
 import app.calorific.calorific.data.food.FoodInfo
 import app.calorific.calorific.data.food.FoodInstance
+import app.calorific.calorific.data.user.UserPrefs
 import app.calorific.calorific.network.OpenFoodFactsApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -21,14 +24,20 @@ class Repository(
     private val TAG = "Repository"
     private val openFoodFactsApi = OpenFoodFactsApi
 
-    private val USER_NAME = stringPreferencesKey("user_name")
+    private object PreferenceKeys{
+        val USER_NAME = stringPreferencesKey("user_name")
+        val CALORIES_GOAL = intPreferencesKey("calories_goal")
+    }
 
 
     val meals = listOf("Breakfast", "Lunch", "Dinner", "Snacks")
 
     val foodHistory = foodDao.getRecentFoods()
-    val nameFlow: Flow<String> = dataStore.data.map { preferences ->
-        preferences[USER_NAME] ?: "Name Not Found"
+    val preferencesFlow: Flow<UserPrefs> = dataStore.data.map { preferences ->
+        UserPrefs(
+            name = preferences[PreferenceKeys.USER_NAME] ?: "Name Not Found",
+            calorieGoal = preferences[PreferenceKeys.CALORIES_GOAL]
+        )
     }
 
     suspend fun searchCode(code: String) : FoodInfo {
@@ -57,6 +66,21 @@ class Repository(
             )
         )
         foodDao.updateFood(foodInfo.copy(lastAccessed = Calendar.getInstance().time.time))
+    }
+
+    suspend fun saveName(){
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.USER_NAME] = "DANIEL"
+        }
+    }
+
+    suspend fun saveCalorieGoal(newGoal: Int?) {
+        dataStore.edit { preferences ->
+            when(newGoal){
+                null -> preferences.remove(PreferenceKeys.CALORIES_GOAL)
+                else -> preferences[PreferenceKeys.CALORIES_GOAL] = newGoal
+            }
+        }
     }
 
 

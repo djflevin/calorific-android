@@ -7,12 +7,23 @@ import kotlinx.coroutines.launch
 
 class UserViewModel(private val repository: Repository) : ViewModel() {
     val name = MediatorLiveData<String>()
+    val caloriesGoal = MediatorLiveData<Int?>()
 
     init {
         viewModelScope.launch {
-            name.addSource(repository.nameFlow.asLiveData(Dispatchers.Main)){
-                name.value = it
+            val preferencesLiveData = repository.preferencesFlow.asLiveData(Dispatchers.Main)
+            name.addSource(preferencesLiveData){
+                name.value = it.name
             }
+            caloriesGoal.addSource(preferencesLiveData){
+                caloriesGoal.value = it.calorieGoal
+            }
+        }
+    }
+
+    fun updateCalorieGoal(newGoal: Int?){
+        viewModelScope.launch {
+            repository.saveCalorieGoal(newGoal)
         }
     }
 }
