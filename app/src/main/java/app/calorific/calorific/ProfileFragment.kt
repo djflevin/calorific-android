@@ -5,11 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import app.calorific.calorific.app.CalorificApplication
 import app.calorific.calorific.databinding.FragmentProfileBinding
+import app.calorific.calorific.viewmodels.UserViewModel
+import app.calorific.calorific.viewmodels.UserViewModelFactory
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
+
+    private val viewModel: UserViewModel by activityViewModels {
+        UserViewModelFactory((requireActivity().application as CalorificApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +30,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.name.observe(viewLifecycleOwner) {
+            binding.userNameTextView.text = it
+        }
     }
 
     override fun onDestroyView() {
