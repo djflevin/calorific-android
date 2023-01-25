@@ -88,4 +88,8 @@ class FoodJournalHostFragment : Fragment() {
 
     }
 
+    fun jumpToPresent(){
+        binding.viewPager.setCurrentItem(5000, true)
+    }
+
 }

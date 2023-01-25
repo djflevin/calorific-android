@@ -1,6 +1,7 @@
 package app.calorific.calorific
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
@@ -10,6 +11,7 @@ import app.calorific.calorific.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+    private val TAG = "MainActivity"
 
 
     private lateinit var binding: ActivityMainBinding
@@ -26,9 +28,18 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        navController = (supportFragmentManager.findFragmentById(binding.navHostFragmentContainer.id) as NavHostFragment).navController
-        binding.bottomNavView.setupWithNavController(navController)
+        val navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragmentContainer.id) as NavHostFragment
+        navController = navHostFragment.navController
 
+        binding.bottomNavView.setupWithNavController(navController)
+        binding.bottomNavView.setOnItemReselectedListener {
+            when(it.itemId){
+                R.id.foodJournalHostFragment -> {
+                    (navHostFragment.childFragmentManager.fragments[0] as? FoodJournalHostFragment)?.jumpToPresent()
+                }
+                else -> {}
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
