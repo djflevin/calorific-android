@@ -55,7 +55,7 @@ class FoodJournalHostFragment : Fragment() {
 
         override fun createFragment(position: Int): Fragment {
             Log.d(TAG, position.toString())
-            return FoodJournalFragment(
+            return FoodJournalDayFragment(
                 date = presentDate.plusDays((position-5000).toLong()
                 )
             )

@@ -14,17 +14,17 @@ import app.calorific.calorific.app.CalorificApplication
 import app.calorific.calorific.data.Meal
 import app.calorific.calorific.databinding.FragmentFoodJournalBinding
 import app.calorific.calorific.viewmodels.FoodJournalViewModel
-import app.calorific.calorific.viewmodels.FoodJournalViewModelFactory
+import app.calorific.calorific.viewmodels.FoodJournalDayViewModelFactory
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class FoodJournalFragment(val date: ZonedDateTime) : Fragment() {
+class FoodJournalDayFragment(val date: ZonedDateTime) : Fragment() {
     private var _binding: FragmentFoodJournalBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: FoodJournalViewModel by viewModels {
-        FoodJournalViewModelFactory((requireActivity().application as CalorificApplication).repository, date.format(DateTimeFormatter.ISO_LOCAL_DATE))
+        FoodJournalDayViewModelFactory((requireActivity().application as CalorificApplication).repository, date.format(DateTimeFormatter.ISO_LOCAL_DATE))
     }
 
     override fun onCreateView(

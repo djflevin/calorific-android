@@ -28,7 +28,7 @@ class FoodJournalViewModel(private val repository: Repository, val date: String 
 
 }
 
-class FoodJournalViewModelFactory(private val repository: Repository, private val date: String) : ViewModelProvider.Factory {
+class FoodJournalDayViewModelFactory(private val repository: Repository, private val date: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FoodJournalViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
