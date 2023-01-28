@@ -36,8 +36,8 @@ class FoodJournalHostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val adapter = DayPagerAdapter()
+
         binding.viewPager.adapter = adapter
         binding.viewPager.setCurrentItem(viewPagerPosition, false)
         binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
@@ -55,12 +55,20 @@ class FoodJournalHostFragment : Fragment() {
 
         override fun createFragment(position: Int): Fragment {
             Log.d(TAG, position.toString())
-            return FoodJournalDayFragment(
+            return FoodJournalDayFragment.newInstance(
                 date = presentDate.plusDays((position-5000).toLong()
                 )
             )
         }
 
+    }
+
+    fun scrollPagerBack(){
+        binding.viewPager.setCurrentItem(binding.viewPager.currentItem.dec(), true)
+    }
+
+    fun scrollPagerForward(){
+        binding.viewPager.setCurrentItem(binding.viewPager.currentItem.inc(), true)
     }
 
     fun showDatePickerPopup(date: ZonedDateTime){

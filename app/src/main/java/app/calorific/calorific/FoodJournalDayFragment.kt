@@ -22,16 +22,31 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-class FoodJournalDayFragment(val date: ZonedDateTime) : Fragment() {
+class FoodJournalDayFragment : Fragment() {
+    companion object{
+        const val DATE = "date"
+        fun newInstance(date: ZonedDateTime) = FoodJournalDayFragment().apply {
+            this.date = date
+        }
+    }
+
+
+
     private var _binding: FragmentFoodJournalBinding? = null
     private val binding get() = _binding!!
 
+    lateinit var date: ZonedDateTime
+
     private val foodJournalViewModel: FoodJournalViewModel by viewModels {
-        FoodJournalDayViewModelFactory((requireActivity().application as CalorificApplication).repository, date.format(DateTimeFormatter.ISO_LOCAL_DATE))
+        FoodJournalDayViewModelFactory(
+            (requireActivity().application as CalorificApplication).repository,
+            date.format(DateTimeFormatter.ISO_DATE))
     }
+
     private val userViewModel: UserViewModel by activityViewModels {
         UserViewModelFactory((requireActivity().application as CalorificApplication).repository)
     }
+
 
 
 
@@ -53,7 +68,7 @@ class FoodJournalDayFragment(val date: ZonedDateTime) : Fragment() {
         val yesterday = presentDay.minusDays(1L).format(DateTimeFormatter.ISO_LOCAL_DATE)
         val tomorrow = presentDay.plusDays(1L).format(DateTimeFormatter.ISO_LOCAL_DATE)
 
-        binding.topBarToolbar.title = when(date.format(DateTimeFormatter.ISO_LOCAL_DATE)){
+        binding.titleTextView.text = when(date.format(DateTimeFormatter.ISO_LOCAL_DATE)){
             today -> "Today"
             yesterday -> "Yesterday"
             tomorrow -> "Tomorrow"
@@ -61,8 +76,14 @@ class FoodJournalDayFragment(val date: ZonedDateTime) : Fragment() {
         }
 
         // Configure calendar picker from top app bar
-        binding.topBarToolbar.setOnClickListener {
+        binding.titleTextView.setOnClickListener {
             (parentFragment as FoodJournalHostFragment).showDatePickerPopup(date)
+        }
+        binding.backArrowImageView.setOnClickListener {
+            (parentFragment as FoodJournalHostFragment).scrollPagerBack()
+        }
+        binding.forwardArrowImageView.setOnClickListener {
+            (parentFragment as FoodJournalHostFragment).scrollPagerForward()
         }
 
         // Set up RecyclerView
