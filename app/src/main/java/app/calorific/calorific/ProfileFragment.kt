@@ -39,8 +39,9 @@ class ProfileFragment : Fragment() {
         }
 
         viewModel.caloriesGoal.observe(viewLifecycleOwner){
-            it?.let { binding.calorieGoalEditText.setText(it.toString()) }
-            Log.d(TAG, "$it")
+            if(!binding.calorieGoalEditText.isFocused){
+                it?.let { binding.calorieGoalEditText.setText(it.toString()) }
+            }
         }
 
 
