@@ -24,7 +24,6 @@ import java.time.format.FormatStyle
 
 class FoodJournalDayFragment : Fragment() {
     companion object{
-        const val DATE = "date"
         fun newInstance(date: ZonedDateTime) = FoodJournalDayFragment().apply {
             this.date = date
         }
@@ -120,15 +119,9 @@ class FoodJournalDayFragment : Fragment() {
             refreshCalorieCounter()
         }
 
-
-        foodJournalViewModel.foods.observe(viewLifecycleOwner) { foodList ->
-            meals = foodJournalViewModel.mealNames.map { mealName ->
-                Meal(
-                    name = mealName,
-                    foods = foodList.filter { it.instance.meal == mealName }
-                )
-            }
-            adapter.submitList(meals)
+        foodJournalViewModel.meals.observe(viewLifecycleOwner){
+            meals = it
+            adapter.submitList(it)
             refreshCalorieCounter()
         }
 

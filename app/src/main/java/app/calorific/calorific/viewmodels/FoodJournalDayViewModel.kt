@@ -4,6 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import app.calorific.calorific.data.Meal
 import app.calorific.calorific.data.Repository
 import app.calorific.calorific.data.food.Food
 import kotlinx.coroutines.launch
@@ -13,13 +14,18 @@ import java.time.format.DateTimeFormatter
 class FoodJournalViewModel(private val repository: Repository, val date: String = ZonedDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE)) : ViewModel() {
     private val TAG = "FoodJournalViewModel"
 
-    val foods = MediatorLiveData<List<Food>>()
+    val meals =  MediatorLiveData<List<Meal>>()
     val mealNames = repository.meals
 
     init {
         viewModelScope.launch {
-            foods.addSource(repository.getFoods(date)){
-                foods.value = it
+            meals.addSource(repository.getFoods(date)){foods ->
+                meals.value = mealNames.map { mealName ->
+                    Meal(
+                        name = mealName,
+                        foods = foods.filter { it.instance.meal == mealName }
+                    )
+                }
             }
         }
     }
