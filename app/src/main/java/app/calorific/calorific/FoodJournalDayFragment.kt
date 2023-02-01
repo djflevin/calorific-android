@@ -39,7 +39,7 @@ class FoodJournalDayFragment : Fragment() {
     private val foodJournalViewModel: FoodJournalViewModel by viewModels {
         FoodJournalDayViewModelFactory(
             (requireActivity().application as CalorificApplication).repository,
-            date.format(DateTimeFormatter.ISO_DATE))
+            date.format(DateTimeFormatter.ISO_LOCAL_DATE))
     }
 
     private val userViewModel: UserViewModel by activityViewModels {
