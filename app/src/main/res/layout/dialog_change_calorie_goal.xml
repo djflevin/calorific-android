@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="?attr/dialogPreferredPadding"
+    android:paddingTop="?attr/dialogPreferredPadding">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/caloriesGoalTextInput"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        app:expandedHintEnabled="false"
+        app:suffixText="Cals">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/caloriesGoalEditText"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="3000"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
