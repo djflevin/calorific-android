@@ -11,9 +11,8 @@ import androidx.viewpager2.widget.ViewPager2
 import app.calorific.calorific.databinding.FragmentFoodJournalHostBinding
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.time.Duration
-import java.time.Instant
-import java.time.ZonedDateTime
+import java.time.temporal.ChronoUnit.DAYS
+import java.time.*
 
 class FoodJournalHostFragment : Fragment() {
     private val TAG = "FoodJournalHostFragment"
@@ -21,7 +20,7 @@ class FoodJournalHostFragment : Fragment() {
     private var _binding: FragmentFoodJournalHostBinding? = null
     private val binding get() = _binding!!
 
-    private val presentDate = ZonedDateTime.now()
+    private val presentDate = LocalDate.now()
 
     var viewPagerPosition = 5000
 
@@ -71,10 +70,10 @@ class FoodJournalHostFragment : Fragment() {
         binding.viewPager.setCurrentItem(binding.viewPager.currentItem.inc(), true)
     }
 
-    fun showDatePickerPopup(date: ZonedDateTime){
+    fun showDatePickerPopup(date: LocalDate){
         val constraints = CalendarConstraints.Builder()
             .setOpenAt(
-                date.toInstant().toEpochMilli()
+                date.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
             )
             .build()
 
@@ -86,8 +85,8 @@ class FoodJournalHostFragment : Fragment() {
             .build()
 
         picker.addOnPositiveButtonClickListener {
-            val selectedDate = ZonedDateTime.ofInstant(Instant.ofEpochMilli(it),date.zone)
-            val difference = Duration.between(selectedDate, presentDate).toDays().toInt()
+            val selectedDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(it), ZoneId.systemDefault()).toLocalDate()
+            val difference = DAYS.between(selectedDate, presentDate).toInt()
             binding.viewPager.setCurrentItem(5000-difference,true)
         }
 

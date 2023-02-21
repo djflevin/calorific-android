@@ -18,13 +18,13 @@ import app.calorific.calorific.viewmodels.FoodJournalDayViewModelFactory
 import app.calorific.calorific.viewmodels.FoodJournalViewModel
 import app.calorific.calorific.viewmodels.UserViewModel
 import app.calorific.calorific.viewmodels.UserViewModelFactory
-import java.time.ZonedDateTime
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 class FoodJournalDayFragment : Fragment() {
     companion object{
-        fun newInstance(date: ZonedDateTime) = FoodJournalDayFragment().apply {
+        fun newInstance(date: LocalDate) = FoodJournalDayFragment().apply {
             this.date = date
         }
     }
@@ -34,7 +34,7 @@ class FoodJournalDayFragment : Fragment() {
     private var _binding: FragmentFoodJournalBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var date: ZonedDateTime
+    lateinit var date: LocalDate
 
     private val foodJournalViewModel: FoodJournalViewModel by viewModels {
         FoodJournalDayViewModelFactory(
@@ -62,7 +62,7 @@ class FoodJournalDayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set top bar title based on date
-        val presentDay = ZonedDateTime.now()
+        val presentDay = LocalDate.now()
         val today = presentDay.format(DateTimeFormatter.ISO_LOCAL_DATE)
         val yesterday = presentDay.minusDays(1L).format(DateTimeFormatter.ISO_LOCAL_DATE)
         val tomorrow = presentDay.plusDays(1L).format(DateTimeFormatter.ISO_LOCAL_DATE)
