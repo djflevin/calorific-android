@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
 
     private fun showCaloriesPopup(){
         val dialogBinding = DialogChangeCalorieGoalBinding.inflate(layoutInflater)
-        dialogBinding.caloriesGoalEditText.setText(viewModel.caloriesGoal.value.toString() ?: "")
+        dialogBinding.caloriesGoalEditText.setText((viewModel.caloriesGoal.value ?: "").toString())
         MaterialAlertDialogBuilder(requireContext()).setView(dialogBinding.root)
             .setTitle("Set Daily Calorie Goal")
             .setPositiveButton("Save") {dialog, _ ->
