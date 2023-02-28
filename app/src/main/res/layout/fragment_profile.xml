@@ -18,7 +18,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-_
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,6 +66,7 @@ _
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:id="@+id/carbsGoalLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -82,6 +83,7 @@ _
                     android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                 <TextView
+                    android:id="@+id/carbsGoalValueTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -95,6 +97,7 @@ _
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:id="@+id/proteinGoalLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -110,6 +113,7 @@ _
                     android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                 <TextView
+                    android:id="@+id/proteinGoalValueTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -123,6 +127,7 @@ _
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:id="@+id/fatGoalLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -138,6 +143,7 @@ _
                     android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                 <TextView
+                    android:id="@+id/fatGoalValueTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"

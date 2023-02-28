@@ -27,6 +27,9 @@ class Repository(
     private object PreferenceKeys{
         val USER_NAME = stringPreferencesKey("user_name")
         val CALORIES_GOAL = intPreferencesKey("calories_goal")
+        val MACROS_PROTEIN_GOAL = intPreferencesKey("protein_goal")
+        val MACROS_FAT_GOAL = intPreferencesKey("fat_goal")
+        val MACROS_CARBS_GOAL = intPreferencesKey("carbs_goal")
     }
 
 
@@ -34,9 +37,20 @@ class Repository(
 
     val foodHistory = foodDao.getRecentFoods()
     val preferencesFlow: Flow<UserPrefs> = dataStore.data.map { preferences ->
+        val proteinGoal = preferences[PreferenceKeys.MACROS_PROTEIN_GOAL]
+        val fatGoal = preferences[PreferenceKeys.MACROS_FAT_GOAL]
+        val carbsGoal = preferences[PreferenceKeys.MACROS_CARBS_GOAL]
+        val macrosGoals = if(proteinGoal!=null && fatGoal!=null && carbsGoal!=null){
+            UserPrefs.MacrosGoals(
+                proteinPercentageGoal = proteinGoal,
+                fatPercentageGoal = fatGoal,
+                carbPercentageGoal = carbsGoal
+            )
+        } else null
         UserPrefs(
             name = preferences[PreferenceKeys.USER_NAME] ?: "Name Not Found",
-            calorieGoal = preferences[PreferenceKeys.CALORIES_GOAL]
+            calorieGoal = preferences[PreferenceKeys.CALORIES_GOAL],
+            macrosGoals = macrosGoals
         )
     }
 
@@ -79,6 +93,23 @@ class Repository(
             when(newGoal){
                 null -> preferences.remove(PreferenceKeys.CALORIES_GOAL)
                 else -> preferences[PreferenceKeys.CALORIES_GOAL] = newGoal
+            }
+        }
+    }
+
+    suspend fun saveMacrosGoals(newGoals: UserPrefs.MacrosGoals?) {
+        dataStore.edit { preferences ->
+            when(newGoals){
+                null -> {
+                    preferences.remove(PreferenceKeys.MACROS_PROTEIN_GOAL)
+                    preferences.remove(PreferenceKeys.MACROS_FAT_GOAL)
+                    preferences.remove(PreferenceKeys.MACROS_CARBS_GOAL)
+                }
+                else -> {
+                    preferences[PreferenceKeys.MACROS_PROTEIN_GOAL] = newGoals.proteinPercentageGoal
+                    preferences[PreferenceKeys.MACROS_FAT_GOAL] = newGoals.fatPercentageGoal
+                    preferences[PreferenceKeys.MACROS_CARBS_GOAL] = newGoals.carbPercentageGoal
+                }
             }
         }
     }

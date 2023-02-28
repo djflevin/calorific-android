@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="?attr/dialogPreferredPadding">
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Percentage" />
+
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grams" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:id="@+id/carbohydratesLabelTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Carbs"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        app:layout_constraintEnd_toStartOf="@+id/proteinLabelTextView"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLayout" />
+
+    <TextView
+        android:id="@+id/proteinLabelTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Protein"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        app:layout_constraintEnd_toStartOf="@+id/fatLabelTextView"
+        app:layout_constraintStart_toEndOf="@id/carbohydratesLabelTextView"
+        app:layout_constraintTop_toBottomOf="@id/buttonLayout" />
+
+    <TextView
+        android:id="@+id/fatLabelTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Fat"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/proteinLabelTextView"
+        app:layout_constraintTop_toBottomOf="@id/buttonLayout" />
+
+    <NumberPicker
+        android:id="@+id/carbohydratesPercentageNumberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@id/carbohydratesLabelTextView"
+        app:layout_constraintStart_toStartOf="@id/carbohydratesLabelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/carbohydratesLabelTextView"
+        tools:text="30%" />
+
+    <NumberPicker
+        android:id="@+id/proteinPercentageNumberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@id/proteinLabelTextView"
+        app:layout_constraintStart_toStartOf="@id/proteinLabelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/proteinLabelTextView"
+        tools:text="40%" />
+
+    <NumberPicker
+        android:id="@+id/fatPercentageNumberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@id/fatLabelTextView"
+        app:layout_constraintStart_toStartOf="@id/fatLabelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fatLabelTextView"
+        tools:text="30%" />
+
+    <TextView
+        android:id="@+id/carbohydratesGramsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/carbohydratesPercentageNumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/carbohydratesPercentageNumberPicker"
+        app:layout_constraintTop_toBottomOf="@+id/carbohydratesPercentageNumberPicker"
+        tools:text="50g" />
+
+    <TextView
+        android:id="@+id/proteinGramsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/proteinPercentageNumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/proteinPercentageNumberPicker"
+        app:layout_constraintTop_toBottomOf="@+id/proteinPercentageNumberPicker"
+        tools:text="100g" />
+
+    <TextView
+        android:id="@+id/fatGramsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/fatPercentageNumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/fatPercentageNumberPicker"
+        app:layout_constraintTop_toBottomOf="@+id/fatPercentageNumberPicker"
+        tools:text="70g" />
+
+    <TextView
+        android:paddingTop="8dp"
+        android:id="@+id/totalPercentageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fatGramsTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="100%"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
